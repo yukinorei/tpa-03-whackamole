@@ -7,9 +7,9 @@
       Start Game
     </button>
     <div class="counters-container">
-      <Counter></Counter>
-      <Counter></Counter>
-      <Counter></Counter>
+      <Counter label='Score' v-bind:count='score'></Counter>
+      <Counter label='HighScore' v-bind:count='highScore'></Counter>
+      <Counter label='Time' v-bind:count='time'></Counter>
     </div>
     <div class="moles-container gameActive">
       <Mole></Mole>
@@ -30,6 +30,13 @@ export default {
     Counter,
     Mole,
   },
+  data: () => {
+    return {
+      score: 0,
+      highScore: 0,
+      time: 0,
+    }
+  }
 };
 </script>
 
