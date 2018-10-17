@@ -39,8 +39,7 @@ export default {
   computed: {
     getClassObj: function () {
       return {
-        gameActive: this.gameActive,
-        notGameActive: !this.gameActive,
+        'game-active': this.gameActive,
       }
     }
   },
