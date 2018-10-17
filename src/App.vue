@@ -12,10 +12,7 @@
       <Counter label='Time' v-bind:count='time'></Counter>
     </div>
     <div class="moles-container gameActive">
-      <Mole></Mole>
-      <Mole></Mole>
-      <Mole></Mole>
-      <Mole></Mole>
+      <Mole v-for='(item, index) in moles' v-bind:active='item' v-bind:key='index'></Mole>
     </div>
   </div>
 </template>
@@ -35,6 +32,7 @@ export default {
       score: 0,
       highScore: 0,
       time: 0,
+      moles: [false, true, false, true],
     }
   }
 };
