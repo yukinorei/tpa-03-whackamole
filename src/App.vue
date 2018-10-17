@@ -11,7 +11,7 @@
       <Counter label='HighScore' v-bind:count='highScore'></Counter>
       <Counter label='Time' v-bind:count='time'></Counter>
     </div>
-    <div class="moles-container gameActive">
+    <div class="moles-container"　v-bind:class="getClassObj">
       <Mole v-for='(item, index) in moles' v-bind:active='item' v-bind:key='index'></Mole>
     </div>
   </div>
@@ -33,8 +33,17 @@ export default {
       highScore: 0,
       time: 0,
       moles: [false, true, false, true],
+      gameActive: false,
     }
-  }
+  },
+  computed: {
+    getClassObj: function () {
+      return {
+        gameActive: this.gameActive,
+        notGameActive: !this.gameActive,
+      }
+    }
+  },
 };
 </script>
 
