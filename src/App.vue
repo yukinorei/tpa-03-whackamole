@@ -3,7 +3,7 @@
     <h1 class="logo">
       Whack-a-mole!
     </h1>
-    <button class="start-game">
+    <button class="start-game" v-on:click='startGame'>
       Start Game
     </button>
     <div class="counters-container">
@@ -31,9 +31,10 @@ export default {
     return {
       score: 0,
       highScore: 0,
-      time: 0,
-      moles: [false, true, false, true],
+      time: 20,
+      moles: [false, false, false, false],
       gameActive: false,
+      interval: null,
     }
   },
   computed: {
@@ -42,6 +43,36 @@ export default {
         'game-active': this.gameActive,
       }
     }
+  },
+  methods: {
+    resetState: function() {
+      this.score = 0;
+      this.timer = 20;
+      this.moles = [false, false, false, false];
+    },
+    startGame: function() {
+      this.resetState();
+      this.gameActive = true;
+      this.startTimer();
+    },
+    endGame: function() {
+      this.gameActive = false;
+      this.stopTimer();
+    },
+    startTimer: function() {
+      this.timerId = setInterval(() => {
+        this.countTime();
+      }, 1000);
+    },
+    countTime: function() {
+      this.timer--;
+      if (this.timer === 0) {
+        this.endGame();
+      }
+    },
+    stopTimer: function() {
+      clearInterval(this.timerId);
+    },
   },
 };
 </script>
