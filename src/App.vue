@@ -34,7 +34,6 @@ export default {
       time: 20,
       moles: [false, false, false, false],
       gameActive: false,
-      interval: null,
     }
   },
   computed: {
