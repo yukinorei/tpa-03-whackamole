@@ -37,16 +37,16 @@ export default {
     }
   },
   computed: {
-    getClassObj: function () {
+    getClassObj: function() {
       return {
         'game-active': this.gameActive,
-      }
+      };
     }
   },
   methods: {
     resetState: function() {
       this.score = 0;
-      this.timer = 20;
+      this.time = 20;
       this.moles = [false, false, false, false];
     },
     startGame: function() {
@@ -64,8 +64,8 @@ export default {
       }, 1000);
     },
     countTime: function() {
-      this.timer--;
-      if (this.timer === 0) {
+      this.time--;
+      if (this.time === 0) {
         this.endGame();
       }
     },
