@@ -11,8 +11,10 @@
       <Counter label='HighScore' v-bind:count='highScore'></Counter>
       <Counter label='Time' v-bind:count='time'></Counter>
     </div>
-    <div class="moles-container"　v-bind:class="getClassObj">
-      <Mole v-for='(item, index) in moles' v-bind:active='item' v-on:hit='handleHit' v-bind:key='index' v-bind:moleId='index'></Mole>
+    <div class="moles-container"
+    v-bind:class="getClassObj"
+    >
+      <Mole v-for='(item, index) in moles' v-bind:active='item' v-on:whack='handleHit' v-bind:key='index'></Mole>
     </div>
   </div>
 </template>
@@ -34,7 +36,7 @@ export default {
       time: 20,
       moles: [false, false, false, false],
       gameActive: false,
-    }
+    };
   },
   computed: {
     getClassObj: function() {
@@ -84,7 +86,7 @@ export default {
     randomMole: function() {
       const randomMoleIndex = Math.floor(Math.random() * this.moles.length);
       if (!this.moles[randomMoleIndex]) {
-        this.active(randomMoleIndex);
+        this.activateMole(randomMoleIndex);
       }
     },
     toggleMole: function(moleId, shouldShow) {
@@ -102,7 +104,7 @@ export default {
     updateHighScore() {
       this.highScore = Math.max(this.highScore, this.score);
     },
-    handleHit: function(moreId) {
+    handleHit: function(moleId) {
       this.score = this.score + 1;
       this.deactivateMole(moleId);
     },

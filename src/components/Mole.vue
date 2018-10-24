@@ -16,14 +16,14 @@ export default {
       return {
         active: this.active,
         inactive: !this.active,
-      },
-    },
+      };
+    }
   },
   methods: {
     hitActive: function() {
       this.$emit('whack', this.moleId );
     },
-  },
+  }
 };
 </script>
 
