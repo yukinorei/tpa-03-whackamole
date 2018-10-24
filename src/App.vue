@@ -3,7 +3,7 @@
     <h1 class="logo">
       Whack-a-mole!
     </h1>
-    <button class="start-game" @click='startGame'>
+    <button class="start-game" v-bind:class="getButtonActive" @click='startGame' :disabled='gameActive'>
       Start Game
     </button>
     <div class="counters-container">
@@ -43,6 +43,11 @@ export default {
     getClassObj: function() {
       return {
         'game-active': this.gameActive,
+      };
+    },
+    getButtonActive: function() {
+      return {
+        buttonActive: this.gameActive,
       };
     }
   },
@@ -113,7 +118,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .whackamole {
   font-family: 'Bungee', sans-serif;
   max-width: 960px;
@@ -130,6 +135,10 @@ export default {
   color: #fff;
   font-size: 1em;
   cursor: pointer;
+}
+
+.buttonActive {
+  opacity: 0.5;
 }
 
 .counters-container {
