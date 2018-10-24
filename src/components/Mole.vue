@@ -1,25 +1,30 @@
 <template>
   <div class="mole-container" v-bind:class="getClassObj">
     <div class="mole-image-container">
-      <img class="mole" src="../assets/mole.png" alt="mole"/>
+      <img class="mole" src="../assets/mole.png" alt="mole" v-on:click="hitActive"/>
     </div>
     <img class="dirt" src="../assets/dirt.svg" alt="mole dirt"/>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Mole',
-    props: ['active'],
-    computed: {
-      getClassObj: function () {
-        return {
-          active: this.active,
-          inactive: !this.active,
-        }
-      }
+export default {
+  name: 'Mole',
+  props: ['active'],
+  computed: {
+    getClassObj: function() {
+      return {
+        active: this.active,
+        inactive: !this.active,
+      };
     }
-  };
+  },
+  methods: {
+    hitActive: function() {
+      this.$emit('whack', this.moleId );
+    },
+  }
+};
 </script>
 
 <style>

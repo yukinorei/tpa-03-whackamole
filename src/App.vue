@@ -11,8 +11,11 @@
       <Counter label='HighScore' v-bind:count='highScore'></Counter>
       <Counter label='Time' v-bind:count='time'></Counter>
     </div>
-    <div class="moles-container"　v-bind:class="getClassObj">
-      <Mole v-for='(item, index) in moles' v-bind:active='item' v-bind:key='index'></Mole>
+    <div
+      class="moles-container"
+      v-bind:class="getClassObj"
+    >
+      <Mole v-for='(item, index) in moles' v-bind:active='item' v-on:whack='handleHit' v-bind:key='index'></Mole>
     </div>
   </div>
 </template>
@@ -34,7 +37,7 @@ export default {
       time: 20,
       moles: [false, false, false, false],
       gameActive: false,
-    }
+    };
   },
   computed: {
     getClassObj: function() {
@@ -52,10 +55,13 @@ export default {
     startGame: function() {
       this.resetState();
       this.gameActive = true;
+      this.appearMole();
       this.startTimer();
     },
     endGame: function() {
       this.gameActive = false;
+      this.updateHighScore();
+      this.stopMole();
       this.stopTimer();
     },
     startTimer: function() {
@@ -71,6 +77,37 @@ export default {
     },
     stopTimer: function() {
       clearInterval(this.timerId);
+    },
+    appearMole: function() {
+      this.moleInterval = setInterval(this.randomMole.bind(this), 400);
+    },
+    stopMole: function() {
+      clearInterval(this.moleInterval);
+    },
+    randomMole: function() {
+      const randomMoleIndex = Math.floor(Math.random() * this.moles.length);
+      if (!this.moles[randomMoleIndex]) {
+        this.activateMole(randomMoleIndex);
+      }
+    },
+    toggleMole: function(moleId, shouldShow) {
+      const moles = this.moles.slice();
+      moles[moleId] = shouldShow;
+      this.moles = moles;
+    },
+    activateMole: function(moleId) {
+      this.toggleMole(moleId, true);
+      setTimeout(() => this.deactivateMole(moleId), 1500);
+    },
+    deactivateMole: function(moleId) {
+      this.toggleMole(moleId, false);
+    },
+    updateHighScore() {
+      this.highScore = Math.max(this.highScore, this.score);
+    },
+    handleHit: function(moleId) {
+      this.score = this.score + 1;
+      this.deactivateMole(moleId);
     },
   },
 };
