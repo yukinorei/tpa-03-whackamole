@@ -3,7 +3,7 @@
     <h1 class="logo">
       Whack-a-mole!
     </h1>
-    <button class="start-game" v-on:click='startGame'>
+    <button class="start-game" @click='startGame'>
       Start Game
     </button>
     <div class="counters-container">
