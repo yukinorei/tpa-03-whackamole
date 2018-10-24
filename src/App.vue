@@ -12,8 +12,8 @@
       <Counter label='Time' v-bind:count='time'></Counter>
     </div>
     <div
-    class="moles-container"
-    v-bind:class="getClassObj"
+      class="moles-container"
+      v-bind:class="getClassObj"
     >
       <Mole v-for='(item, index) in moles' v-bind:active='item' v-on:whack='handleHit' v-bind:key='index'></Mole>
     </div>
